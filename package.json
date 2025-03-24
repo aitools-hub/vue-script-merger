@@ -1,0 +1,39 @@
+{
+  "name": "vue-script-merger",
+  "version": "1.0.0",
+  "description": "一个灵活的Vue组件脚本拆分合并插件",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.js --format cjs,esm --dts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "vite-plugin",
+    "vue",
+    "script",
+    "merger",
+    "code-splitting"
+  ],
+  "author": "wy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/vue-script-merger"
+  },
+  "peerDependencies": {
+    "vite": "^2.0.0 || ^3.0.0 || ^4.0.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.0.0"
+  }
+}
