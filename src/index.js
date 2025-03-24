@@ -5,52 +5,23 @@ import path from 'path'
  * Vue Script Merger - 灵活的Vue组件脚本拆分合并插件
  * 
  * @typedef {Object} ScriptMergerOptions
- * @property {string[]} scriptPaths - 脚本查找路径(相对或绝对路径)
- * @property {string[]} extensions - 脚本文件扩展名
- * @property {Object} aliases - 路径别名映射
- * @property {boolean} debug - 是否启用调试日志
- * @property {Function} resolveScriptPath - 自定义脚本路径解析函数
- * @property {Function} transform - 自定义内容转换函数
- * @property {string} rootDir - 项目根目录(默认为process.cwd())
- * @property {string} srcDir - 源代码目录(默认为src)
- * @property {string} injectComment - 注入脚本时的注释模板
- * @property {boolean} useSameDir - 是否优先使用同目录下的脚本文件
+ * @property {string[]} [scriptPaths=['views','scripts','components']] - 脚本查找路径(相对或绝对路径)
+ * @property {string[]} [extensions=['.script.js','.js']] - 脚本文件扩展名
+ * @property {Object} [aliases={}] - 路径别名映射
+ * @property {boolean} [debug=false] - 是否启用调试日志
+ * @property {Function} [resolveScriptPath] - 自定义脚本路径解析函数
+ * @property {Function} [transform] - 自定义内容转换函数
+ * @property {string} [rootDir=process.cwd()] - 项目根目录
+ * @property {string} [srcDir='src'] - 源代码目录
+ * @property {string} [injectComment='// 自动导入的外部脚本: {filename}'] - 注入脚本时的注释模板
+ * @property {boolean} [useSameDir=true] - 是否优先使用同目录下的脚本文件
  */
-
-export interface ScriptMergerOptions {
-  /** 脚本查找路径(相对或绝对路径) */
-  scriptPaths?: string[];
-  /** 脚本文件扩展名 */
-  extensions?: string[];
-  /** 路径别名映射 */
-  aliases?: Record<string, string>;
-  /** 是否启用调试日志 */
-  debug?: boolean;
-  /** 自定义脚本路径解析函数 */
-  resolveScriptPath?: (vueFilePath: string) => string | null;
-  /** 自定义内容转换函数 */
-  transform?: (vueCode: string, scriptContent: string, comment: string, vueFilePath: string, scriptPath: string) => string | null;
-  /** 项目根目录 */
-  rootDir?: string;
-  /** 源代码目录 */
-  srcDir?: string;
-  /** 注入脚本时的注释模板 */
-  injectComment?: string;
-  /** 是否优先使用同目录下的脚本文件 */
-  useSameDir?: boolean;
-}
 
 /**
  * Vue脚本合并器插件
- * @param options 配置选项
+ * @param {ScriptMergerOptions} options - 配置选项
+ * @returns {import('vite').Plugin} Vite插件对象
  */
-export default function vueScriptMerger(options?: ScriptMergerOptions): {
-  name: string;
-  enforce: string;
-  configResolved(resolvedConfig: any): void;
-  transform(code: string, id: string): string | null;
-};
-
 function vueScriptMerger(options = {}) {
   // 默认配置
   const defaultOptions = {
@@ -279,4 +250,6 @@ function vueScriptMerger(options = {}) {
       }
     }
   }
-} 
+}
+
+export default vueScriptMerger 

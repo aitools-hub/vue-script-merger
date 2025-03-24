@@ -4,6 +4,9 @@
   "description": "一个灵活的Vue组件脚本拆分合并插件",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "types": "dist/index.d.ts",
   "files": [
     "dist",
@@ -11,7 +14,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup src/index.js --format cjs,esm --dts",
+    "build": "node build.js",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -21,11 +24,11 @@
     "merger",
     "code-splitting"
   ],
-  "author": "wy",
+  "author": "aitools-hub",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/vue-script-merger"
+    "url": "https://github.com/aitools-hub/vue-script-merger"
   },
   "peerDependencies": {
     "vite": "^2.0.0 || ^3.0.0 || ^4.0.0",
@@ -33,7 +36,6 @@
   },
   "devDependencies": {
     "tsup": "^7.2.0",
-    "typescript": "^5.0.0",
-    "vite": "^4.0.0"
+    "typescript": "^5.0.0"
   }
 }
